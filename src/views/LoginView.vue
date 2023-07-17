@@ -17,5 +17,7 @@ import LoginForm from "../components/LoginForm.vue";
 </script>
 
 <style scoped>
-
+h2 {
+    margin-left: 600px;
+}
 </style>

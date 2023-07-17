@@ -48,8 +48,11 @@
           subject_name: this.subjectName,
         };
   
+        const API_ROOT = process.env.VUE_APP_API_URL;
+      const API_URL = `${API_ROOT}/api/subject`;
+
         axios
-          .post('/api/subject', subjectData)
+          .post(API_URL, subjectData)
           .then(response => {
             console.log(response.data);
             // Perform any necessary actions on the frontend (e.g., show a success message)

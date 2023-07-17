@@ -31,7 +31,11 @@ mounted() {
 },
 methods: {
   getData() {
-    axios.get('http://localhost:3000/api/subject')
+
+    const API_ROOT = process.env.VUE_APP_API_URL;
+      const API_URL = `${API_ROOT}/api/subject`;
+
+    axios.get(API_URL)
       .then(response => {
         this.subjects = response.data;
         console.log(this.subjects)

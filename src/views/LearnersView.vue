@@ -1,9 +1,9 @@
 <template>
     <div>
   
-      <H2>Teachers Available</H2>
-<h5>Here you can view all teachers in Cape Town and the subjects they teach!</h5>
-      <AddTeacher/>
+      <H2>Learners of Cape Town</H2>
+<h5>Here you can view all learners in Cape Town and the subjects they take!</h5>
+      <AddLearner/>
       
       <table class="table">
         <thead>
@@ -12,21 +12,26 @@
             <th>name</th>
             <th>surname</th>
             <th>email</th>
+            <th>grade ID</th>
+            <th>Current School</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="teacher in teachers" :key="teacher.id">
-            <td>{{ teacher.id }}</td>
-            <td>{{ teacher.first_name }}</td>
-            <td>{{ teacher.last_name }}</td>
-            <td>{{ teacher.email }}</td>
+          <tr v-for="learner in learners" :key="learner.id">
+            <td>{{ learner.id }}</td>
+            <td>{{ learner.first_name }}</td>
+            <td>{{ learner.last_name }}</td>
+            <td>{{ learner.email }}</td>
+            <td>{{ learner.grade_id }}</td>
+            <td>{{ learner.current_school }}</td>
+
             <td>
               <!-- Button trigger modal -->
               <button
                 type="button"
                 class="btn btn-dark float-end"
                 data-bs-toggle="modal"
-                :data-bs-target="'#modal-' + teacher.id"
+                :data-bs-target="'#modal-' + learner.id"
               >
                 VIEW MORE
               </button>
@@ -34,28 +39,28 @@
               <!-- Modal -->
               <div
                 class="modal fade"
-                :id="'modal-' + teacher.id"
+                :id="'modal-' + learner.id"
                 tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                aria-labelledby="learnerModalLabel"
                 aria-hidden="true"
                 data-bs-backdrop="true"
               >
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">{{ teacher.first_name }} {{teacher.last_name}}</h1>
+                      <h1 class="modal-title fs-5" id="learnerModalLabel">{{ learner.first_name }} {{learner.last_name}}</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         
-                      <SingleTeacherView :teacher="teacher" />
+                      <SingleLearnerView :learner="learner" />
   
   
   
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-danger" v-on:click="deleteTeacher">Delete</button>
+                      <button type="submit" class="btn btn-danger" v-on:click="deleteLearner">Delete</button>
                     </div>
                   </div>
                 </div>
@@ -70,18 +75,18 @@
   
   <script>
   import axios from 'axios';
-  import SingleTeacherView from "../views/SingleTeacherView.vue";
-  import AddTeacher from "../components/AddTeacher.vue";
+  import SingleLearnerView from "../views/SingleLearnerView.vue";
+  import AddLearner from "../components/AddLearner.vue";
   
   export default {
     components: {
-    SingleTeacherView,
-    AddTeacher,
+    SingleLearnerView,
+    AddLearner,
   },
   
     data() {
       return {
-        teachers: []
+        learners: []
       };
     },
     mounted() {
@@ -89,10 +94,10 @@
     },
     methods: {
       getData() {
-        axios.get('http://localhost:3000/api/teacher')
+        axios.get('http://localhost:3000/api/learner')
           .then(response => {
-            this.teachers = response.data;
-            console.log(this.teachers)
+            this.learners = response.data;
+            console.log(this.learners)
           })
           .catch(error => {
             console.error(error);
