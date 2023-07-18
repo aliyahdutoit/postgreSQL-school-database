@@ -14,11 +14,7 @@ import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
 
-module.exports = {
-    publicPath: process.env.NODE_ENV === 'production'
-      ? '/postgreSQL-school-database.git'
-      : '/'
-  }
+
 Vue.config.productionTip = false;
 
 
