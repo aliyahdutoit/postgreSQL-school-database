@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aliyahdutoit.github.io/postgreSQL-school-database.git/",
+  "homepage": "https://aliyahdutoit.github.io/postgreSQL-school-database/",
 
   "scripts": {
     "serve": "vue-cli-service serve",
