@@ -62,6 +62,7 @@ app.get('/api/school', (req, res) => {
   app.get('/api/teachersubject', (req, res, next) => {
   
       //filter teachers with subject name in Single Subject View
+
     const subject_name = req.query.subject_name;
     
     if (!subject_name) {
@@ -82,9 +83,10 @@ app.get('/api/school', (req, res) => {
       .catch(next);
 
         // filter subjects with teacher name in Single teacher View
+
     //     const teacher_last_name = req.query.teacher_last_name;
     
-    // if (!teacher_last_name) {
+    // if (!teacher_id) {
     //   return res.json({
     //     error: "No subject entered"
     //   });
@@ -150,6 +152,18 @@ app.get('/api/teacher', (req, res) => {
       res.status(500).json({ error: 'An error occurred' }); 
     });
 });
+
+//link teacher to subject
+app.post('/api/teachersubject', (req, res) => {
+  db.one(' SELECT link_teacher_to_subject($1, $2) ; ', [req.body.teacher_id, req.body.subject_id])
+    .then(data => {
+      res.sendStatus(200);
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' }); 
+      });
+  });
 
 //add a new teacher
 app.post('/api/teacher', (req, res) => {
