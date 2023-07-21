@@ -84,24 +84,24 @@ app.get('/api/school', (req, res) => {
 
         // filter subjects with teacher name in Single teacher View
 
-    //     const teacher_last_name = req.query.teacher_last_name;
+        const teacher_id = req.query.teacher_id;
     
-    // if (!teacher_id) {
-    //   return res.json({
-    //     error: "No subject entered"
-    //   });
-    // }    
+    if (!teacher_id) {
+      return res.json({
+        error: "No subject entered"
+      });
+    }    
 
 
-    // db.any('SELECT filter_teachers($1)', [teacher_last_name])
-    //   .then(data => {
-    //     res.json(data);
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //     res.status(500).json({ error: 'An error occurred' });
-    //   })
-    //   .catch(next);
+    db.any('SELECT filter_teachers($1)', [teacher_id])
+      .then(data => {
+        res.json(data);
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred' });
+      })
+      .catch(next);
   });
   
 //add a new subject
