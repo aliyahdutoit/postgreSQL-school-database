@@ -57,16 +57,13 @@ app.get("/api/school", (req, res) => {
 //     });
 // });
 
-// filter TEACHERSUBJECT TABLE
-app.get("/api/teacher_subjects", (req, res, next) => {
-  
   // filter subjects with teacher name in Single teacher View
-
+  app.get("/api/teacher_subjects", (req, res, next) => {
   const teacher_id = req.query.teacher_id;
 
   if (!teacher_id) {
     return res.json({
-      error: "No subject entered",
+      error: "No teacher entered",
     });
   }
 

@@ -1,15 +1,15 @@
 GET https://schooldb.onrender.com/api/teacher_subjects
 content-type: application/json
 
-{   "teacher_id"    : 4, 
-    "subject_id"    : 2
+{   "teacher_id"    : 4
+    
 }
 
 ###
 
-GET http://localhost:3000/api/teacher_subjects
+GET http://localhost:3000/api/localhost:3000/api/teacher_subjects
 content-type: application/json
 
-{   "teacher_id"    : 4, 
-    "subject_id"    : 2
+{   "teacher_id"    : 2
+   
 }
