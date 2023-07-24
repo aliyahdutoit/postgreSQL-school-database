@@ -185,28 +185,6 @@ app.post("/api/teacher", (req, res) => {
     });
 });
 
-// filter subjects with teacher name in Single Teacher View
-// app.get('/api/teachersubject', (req, res) => {
-
-//   const teacher_last_name = req.query.teacher_last_name;
-
-//   if (!teacher_last_name) {
-//     res.json({
-//       error : "No teacher entered"
-//     })
-//   }
-
-//   db.any('SELECT filter_teachers($1)', [teacher_last_name])
-//     .then(data => {
-//       res.json(data);
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.status(500).json({ error: 'An error occurred' });
-//     });
-// });
-
-// link teacher to subject in single subject view
 
 // retrieve learner table
 app.get("/api/learner", (req, res) => {
@@ -219,6 +197,24 @@ app.get("/api/learner", (req, res) => {
       res.status(500).json({ error: "An error occurred" });
     });
 });
+
+//add a new learner
+app.post("/api/learner", (req, res) => {
+  db.one("SELECT add_learner($1, $2, $3, $4);", [
+    req.body.learner_first_name,
+    req.body.learner_last_name,
+    req.body.learner_email,
+    req.body.learner_grade_id
+  ])
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "An error occurred" });
+    });
+});
+
 // Start the server
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
